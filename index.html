@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RGB Color Mixer</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #121212;
+      color: white;
+      text-align: center;
+      padding: 40px;
+    }
+
+    h1 {
+      color: #fbc02d;
+    }
+
+    .color-box {
+      margin: 30px auto;
+      width: 300px;
+      height: 100px;
+      line-height: 100px;
+      color: white;
+      border-radius: 10px;
+      font-size: 18px;
+      transition: background-color 0.3s ease;
+    }
+
+    .sliders {
+      margin-top: 20px;
+    }
+
+    .sliders label {
+      display: block;
+      margin: 15px 0 5px;
+      font-weight: bold;
+    }
+
+    .hex-output {
+      margin-top: 10px;
+      font-style: italic;
+      color: #cfcfcf;
+    }
+
+    input[type="range"] {
+      width: 300px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>RGB Color Mixer</h1>
+  <p>Use the sliders below to mix a color using RGB values:</p>
+
+  <div id="colorBox" class="color-box">rgb(255, 123, 71)</div>
+  <div class="hex-output" id="hexOutput">#FF7B47</div>
+
+  <div class="sliders">
+    <label>Red: <input type="range" min="0" max="255" value="255" id="redSlider" oninput="updateColor()" /></label>
+    <label>Green: <input type="range" min="0" max="255" value="123" id="greenSlider" oninput="updateColor()" /></label>
+    <label>Blue: <input type="range" min="0" max="255" value="71" id="blueSlider" oninput="updateColor()" /></label>
+  </div>
+
+  <script>
+    function updateColor() {
+      const r = document.getElementById('redSlider').value;
+      const g = document.getElementById('greenSlider').value;
+      const b = document.getElementById('blueSlider').value;
+
+      const rgb = `rgb(${r}, ${g}, ${b})`;
+      const hex = `#${Number(r).toString(16).padStart(2, '0')}${Number(g).toString(16).padStart(2, '0')}${Number(b).toString(16).padStart(2, '0')}`.toUpperCase();
+
+      document.getElementById('colorBox').style.backgroundColor = rgb;
+      document.getElementById('colorBox').textContent = rgb;
+      document.getElementById('hexOutput').textContent = hex;
+    }
+
+    updateColor(); // run on load
+  </script>
+</body>
+</html>
